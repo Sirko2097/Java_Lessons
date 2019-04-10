@@ -7,6 +7,6 @@ package com.company.examples;
 public class MainExample {
 
     public static void main(String[] args) {
-        System.out.println("Test");
+
     }
 }
