@@ -1,4 +1,6 @@
 package com.company.thirdtask.model;
 
-public class Notebook {
+// change it to enum -> test
+public enum  Notebook {
+
 }
