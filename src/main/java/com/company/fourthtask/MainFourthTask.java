@@ -1,5 +1,6 @@
 package com.company.fourthtask;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
@@ -17,6 +18,9 @@ public class MainFourthTask {
 
         stream = Arrays.stream(arr);
         System.out.println("Elem == 0: " + stream.filter((n) -> n == 0).count());
+
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(5);
 
         stream = Arrays.stream(arr);
         System.out.println("Elem > 0: " + stream.filter((n) -> n > 0).count());
