@@ -9,9 +9,13 @@ import java.util.Optional;
 public interface DAOCoffee {
     Optional<Coffee> read(String key) throws SQLException;
 
-    List<Coffee> getAllCoffee();
+    List<Coffee> getAllCoffee() throws SQLException;
 
-    List<Coffee> findByName();
+    List<Coffee> findByName(String name) throws SQLException;
 
-    List<Coffee> findByCondition();
+    List<Coffee> findByCondition(String condition) throws SQLException;
+
+    List<Coffee> getAllInfoAboutCoffee() throws SQLException;
+
+    List<Coffee> sortCoffeeByName();
 }
