@@ -2,10 +2,16 @@ package com.company.backpacking.dao;
 
 import com.company.backpacking.model.Coffee;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public interface DAOCoffee {
-    Coffee read(String key);
+    Optional<Coffee> read(String key) throws SQLException;
 
-    List<Coffee> getAllCoffoee();
+    List<Coffee> getAllCoffee();
+
+    List<Coffee> findByName();
+
+    List<Coffee> findByCondition();
 }

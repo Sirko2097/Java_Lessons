@@ -12,11 +12,13 @@ import lombok.Setter;
 public class Coffee {
 
     private String name;
-    private String weight;
+    private String condition;
+    private Integer weight;
     private Double price;
 
-    public Coffee(String name, String weight, Double price) {
+    public Coffee(String name, String condition, Integer weight, Double price) {
         this.name = name;
+        this.condition = condition;
         this.weight = weight;
         this.price = price;
     }
