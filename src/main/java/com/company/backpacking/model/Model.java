@@ -2,7 +2,6 @@ package com.company.backpacking.model;
 
 import com.company.backpacking.dao.impl.DAOCoffeeImpl;
 import com.company.backpacking.dao.impl.DAOFactoryImpl;
-import com.company.backpacking.view.View;
 
 
 import java.sql.Connection;
@@ -17,7 +16,6 @@ import java.util.Optional;
  */
 public class Model {
 
-    private View view;
     private Connection connection;
 
     {
@@ -34,7 +32,7 @@ public class Model {
      * This method sorts list by price/weight
      *
      * @return string of sorted list
-     * @throws SQLException
+     * @throws SQLException because of work with db
      */
     public String sortCoffeeByQualityPrice() throws SQLException {
         List<Coffee> allCoffee = daoCoffee.getAllCoffee();
@@ -45,12 +43,12 @@ public class Model {
 
     private StringBuilder getStringBuilder(List<Coffee> allCoffee) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Coffee coffee : allCoffee) {
-            stringBuilder.append(coffee.getName()).append(" ")
-                    .append(coffee.getCondition()).append(" ")
-                    .append(coffee.getPrice()).append("$ ")
-                    .append(coffee.getWeight()).append("kg\n");
-        }
+
+        allCoffee.forEach((n) -> stringBuilder.append(n.getName()).append(" ")
+                .append(n.getCondition()).append(" ")
+                .append(n.getPrice()).append("$ ")
+                .append(n.getWeight()).append("kg\n"));
+
         return stringBuilder;
     }
 
@@ -59,24 +57,19 @@ public class Model {
      *
      * @param key - id
      * @return - element ot null
-     * @throws SQLException
+     * @throws SQLException because of work with db
      */
     public String read(String key) throws SQLException {
         Optional<Coffee> coffee = daoCoffee.read(key);
-        if (coffee.isPresent()) {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(coffee.get().getName()).append(" ")
-                    .append(coffee.get().getCondition()).append(" ")
-                    .append(coffee.get().getPrice()).append("$ ")
-                    .append(coffee.get().getWeight()).append("kg\n");
-            return stringBuilder.toString();
-        }
-        return null;
+        return coffee.map(value -> value.getName() + " " +
+                value.getCondition() + " " +
+                value.getPrice() + "$ " +
+                value.getWeight() + "kg\n").orElse(null);
     }
 
     /**
      * @return list of coffee
-     * @throws SQLException
+     * @throws SQLException because of work with db
      */
     public String getAllCoffee() throws SQLException {
         return getStringBuilder(daoCoffee.getAllCoffee()).toString();
@@ -87,7 +80,7 @@ public class Model {
      *
      * @param name of coffee
      * @return coffee
-     * @throws SQLException
+     * @throws SQLException because of work with db
      */
     public String findByName(String name) throws SQLException {
         return getStringBuilder(daoCoffee.findByName(name)).toString();
@@ -98,7 +91,7 @@ public class Model {
      *
      * @param condition of coffee
      * @return coffee
-     * @throws SQLException
+     * @throws SQLException because of work with db
      */
     public String findByCondition(String condition) throws SQLException {
         return getStringBuilder(daoCoffee.findByCondition(condition)).toString();
@@ -108,10 +101,20 @@ public class Model {
      * Get all info from db
      *
      * @return list from db
-     * @throws SQLException
+     * @throws SQLException because of work with db
      */
     public String getAllInfoAboutCoffee() throws SQLException {
-        return getStringBuilder(daoCoffee.getAllInfoAboutCoffee()).toString();
+        List<Coffee> allInfoAboutCoffee = daoCoffee.getAllInfoAboutCoffee();
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        allInfoAboutCoffee.forEach((n) -> stringBuilder.append(n.getId()).append(" ")
+                .append(n.getName()).append(" ")
+                .append(n.getCondition()).append(" ")
+                .append(n.getPrice()).append("$ ")
+                .append(n.getWeight()).append("kg\n"));
+
+        return stringBuilder.toString();
     }
 
     /**
@@ -136,7 +139,7 @@ public class Model {
                     if (allCoffee.get(i - 1).getWeight() > j) {
                         matrix[i][j] = matrix[i - 1][j];
                     } else {
-                        matrix[i][j] = (int) Math.max(matrix[i - 1][j], matrix[i - 1][j - allCoffee.get(i - 1).getWeight()]
+                        matrix[i][j] = Math.max(matrix[i - 1][j], matrix[i - 1][j - allCoffee.get(i - 1).getWeight()]
                                 + (allCoffee.get(i - 1).getPrice()));
                     }
                 }
@@ -155,13 +158,18 @@ public class Model {
             }
 
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("Capacity: ").append(capacity).append("\n");
 
-            for (Coffee coffee : solution) {
-                stringBuilder.append(coffee.getName()).append(" ")
-                        .append(coffee.getCondition()).append(" ")
-                        .append(coffee.getPrice()).append("$ ")
-                        .append(coffee.getWeight()).append("kg\n");
+            if (solution.isEmpty()) {
+                stringBuilder.append("Cannot be packed");
+            } else {
+                stringBuilder.append("Capacity: ").append(capacity).append("\n");
+
+
+                solution.forEach((n) -> stringBuilder.append(n.getId()).append(" ")
+                        .append(n.getName()).append(" ")
+                        .append(n.getCondition()).append(" ")
+                        .append(n.getPrice()).append("$ ")
+                        .append(n.getWeight()).append("kg\n"));
             }
             return stringBuilder.toString();
         } catch (SQLException e) {

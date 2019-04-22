@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 
 /**
  * App's controller
+ *
  * @author sirko
  */
 public class Controller {
@@ -29,9 +30,10 @@ public class Controller {
 
     /**
      * Menu processor and connector between methods of model
+     *
      * @throws SQLException - connection to DB
      */
-    public void processUser() throws  SQLException {
+    public void processUser() throws SQLException {
         setLocale();
         char key = '0';
         while (true) {
@@ -59,21 +61,11 @@ public class Controller {
                     break;
                 case '3':
                     view.printMessage(bundle.getString("input.name"));
-                    try {
-                        view.printMessage(model.findByName(checkInfo(
-                                reader.readLine(), bundle.getString("name.regexp"))));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    view.printMessage(model.findByName(checkInfo(bundle.getString("name.regexp"))));
                     break;
                 case '4':
                     view.printMessage(bundle.getString("input.condition"));
-                    try {
-                        view.printMessage(model.findByCondition(checkInfo(
-                                reader.readLine(), bundle.getString("name.regexp"))));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    view.printMessage(model.findByCondition(checkInfo(bundle.getString("name.regexp"))));
                     break;
                 case '5':
                     view.printMessage(model.getAllInfoAboutCoffee());
@@ -119,18 +111,17 @@ public class Controller {
             e.printStackTrace();
         }
     }
+
     /**
      * This method checks user's data.<br>
      *
-     * @param str - message, which will be printed. It shows what exactly user need to input.
      * @param regexp - regexp for checking user data.
      * @return user data, if everything is correct
-     * */
-    private String checkInfo(String str, String regexp) {
+     */
+    private String checkInfo(String regexp) {
         String value;
         while (true) {
             try {
-                view.printMessage(str);
                 value = reader.readLine().trim();
                 if (value.matches(regexp)) {
                     return value;

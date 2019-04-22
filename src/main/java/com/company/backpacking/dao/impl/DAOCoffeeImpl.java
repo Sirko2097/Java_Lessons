@@ -28,11 +28,12 @@ public class DAOCoffeeImpl implements DAOCoffee {
      *
      * @param key individual key in DB
      * @return Coffee, if it exists in DB
-     * @throws SQLException
+     * @throws SQLException because of working with DB
      */
     @Override
     public Optional<Coffee> read(String key) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(bundle.getString("FIND_BY_KEY"));
+        preparedStatement.setInt(1, Integer.parseInt(key));
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if (resultSet.next()) {
@@ -51,7 +52,7 @@ public class DAOCoffeeImpl implements DAOCoffee {
      * Print all coffee from db
      *
      * @return List of coffee
-     * @throws SQLException
+     * @throws SQLException because of working with DB
      */
     @Override
     public List<Coffee> getAllCoffee() throws SQLException {
@@ -64,7 +65,7 @@ public class DAOCoffeeImpl implements DAOCoffee {
      *
      * @param name - name of coffee brand
      * @return list of coffee
-     * @throws SQLException
+     * @throws SQLException because of working with DB
      */
     @Override
     public List<Coffee> findByName(String name) throws SQLException {
@@ -76,9 +77,9 @@ public class DAOCoffeeImpl implements DAOCoffee {
     /**
      * This method is helper for searchers.
      *
-     * @param preparedStatement
+     * @param preparedStatement - request to DB
      * @return list of coffee
-     * @throws SQLException
+     * @throws SQLException because of working with DB
      */
     private List<Coffee> getCoffees(PreparedStatement preparedStatement) throws SQLException {
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -98,7 +99,7 @@ public class DAOCoffeeImpl implements DAOCoffee {
      *
      * @param condition of coffee
      * @return list of coffee
-     * @throws SQLException
+     * @throws SQLException because of working with DB
      */
     @Override
     public List<Coffee> findByCondition(String condition) throws SQLException {
@@ -111,7 +112,7 @@ public class DAOCoffeeImpl implements DAOCoffee {
      * This method return all info from db about coffee. For admin(in future)
      *
      * @return list of coffee.
-     * @throws SQLException
+     * @throws SQLException because of working with DB
      */
     @Override
     public List<Coffee> getAllInfoAboutCoffee() throws SQLException {
