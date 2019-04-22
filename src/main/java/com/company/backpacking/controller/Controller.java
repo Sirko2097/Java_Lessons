@@ -60,7 +60,8 @@ public class Controller {
                 case '3':
                     view.printMessage(bundle.getString("input.name"));
                     try {
-                        view.printMessage(model.findByName(reader.readLine()));
+                        view.printMessage(model.findByName(checkInfo(
+                                reader.readLine(), bundle.getString("name.regexp"))));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -68,7 +69,8 @@ public class Controller {
                 case '4':
                     view.printMessage(bundle.getString("input.condition"));
                     try {
-                        view.printMessage(model.findByCondition(reader.readLine()));
+                        view.printMessage(model.findByCondition(checkInfo(
+                                reader.readLine(), bundle.getString("name.regexp"))));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -117,6 +119,28 @@ public class Controller {
             e.printStackTrace();
         }
     }
-
+    /**
+     * This method checks user's data.<br>
+     *
+     * @param str - message, which will be printed. It shows what exactly user need to input.
+     * @param regexp - regexp for checking user data.
+     * @return user data, if everything is correct
+     * */
+    private String checkInfo(String str, String regexp) {
+        String value;
+        while (true) {
+            try {
+                view.printMessage(str);
+                value = reader.readLine().trim();
+                if (value.matches(regexp)) {
+                    return value;
+                } else {
+                    view.printError(bundle.getString("input.wrong"));
+                }
+            } catch (IOException e) {
+                view.printError(bundle.getString("input.wrong"));
+            }
+        }
+    }
 
 }

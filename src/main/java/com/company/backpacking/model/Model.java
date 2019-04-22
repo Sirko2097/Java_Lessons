@@ -96,7 +96,7 @@ public class Model {
     /**
      * Search by condition
      *
-     * @param condition
+     * @param condition of coffee
      * @return coffee
      * @throws SQLException
      */
