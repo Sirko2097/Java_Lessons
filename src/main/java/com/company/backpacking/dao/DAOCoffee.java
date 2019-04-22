@@ -16,6 +16,4 @@ public interface DAOCoffee {
     List<Coffee> findByCondition(String condition) throws SQLException;
 
     List<Coffee> getAllInfoAboutCoffee() throws SQLException;
-
-    List<Coffee> sortCoffeeByName();
 }

@@ -2,23 +2,18 @@ package com.company.backpacking.dao.impl;
 
 import com.company.backpacking.dao.DAOCoffee;
 import com.company.backpacking.model.Coffee;
-import lombok.NoArgsConstructor;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * DAO for coffee object.
  *
  * @author sirko
  */
-@NoArgsConstructor
 public class DAOCoffeeImpl implements DAOCoffee {
 
     private Connection connection;
@@ -45,7 +40,7 @@ public class DAOCoffeeImpl implements DAOCoffee {
             coffee.setName(resultSet.getString(1));
             coffee.setCondition(resultSet.getString(2));
             coffee.setWeight(resultSet.getInt(3));
-            coffee.setPrice(resultSet.getDouble(4));
+            coffee.setPrice(resultSet.getInt(4));
             return Optional.of(coffee);
         }
 
@@ -91,7 +86,7 @@ public class DAOCoffeeImpl implements DAOCoffee {
         Coffee coffee;
         while (resultSet.next()) {
             coffee = new Coffee(resultSet.getString(1), resultSet.getString(2),
-                    resultSet.getInt(3), resultSet.getDouble(4));
+                    resultSet.getInt(3), resultSet.getInt(4));
 
             coffees.add(coffee);
         }
@@ -126,16 +121,10 @@ public class DAOCoffeeImpl implements DAOCoffee {
         Coffee coffee;
         while (resultSet.next()) {
             coffee = new Coffee(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3),
-                    resultSet.getInt(4), resultSet.getDouble(5));
+                    resultSet.getInt(4), resultSet.getInt(5));
 
             coffees.add(coffee);
         }
         return coffees;
-    }
-
-    @Override
-    public List<Coffee> sortCoffeeByName() {
-        List<Coffee> allCoffee = getAllCoffee();
-
     }
 }

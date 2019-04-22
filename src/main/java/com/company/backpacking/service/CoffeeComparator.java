@@ -8,6 +8,6 @@ public class CoffeeComparator implements Comparator<Coffee> {
 
     @Override
     public int compare(Coffee firstCoffee, Coffee secondCoffee) {
-        return firstCoffee.getName().compareTo(secondCoffee.getName());
+        return (firstCoffee.getPrice()/firstCoffee.getWeight().compareTo((secondCoffee.getPrice()/secondCoffee.getWeight())));
     }
 }
