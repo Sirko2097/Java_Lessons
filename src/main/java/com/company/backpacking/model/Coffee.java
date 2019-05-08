@@ -6,7 +6,7 @@ import lombok.*;
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
-public class Coffee implements Comparable<Coffee>{
+public class Coffee implements Comparable<Coffee> {
 
     private Integer id;
     private String name;

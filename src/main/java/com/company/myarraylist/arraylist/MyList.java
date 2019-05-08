@@ -1,4 +1,4 @@
-package com.company.myarraylist;
+package com.company.myarraylist.arraylist;
 
 public interface MyList<E> extends Iterable<E> {
 

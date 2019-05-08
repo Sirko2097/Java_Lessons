@@ -1,4 +1,4 @@
-package com.company.myarraylist;
+package com.company.myarraylist.service;
 
 import java.util.Iterator;
 
