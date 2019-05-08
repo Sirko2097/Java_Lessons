@@ -61,10 +61,10 @@ public class Model {
      */
     public String read(String key) throws SQLException {
         Optional<Coffee> coffee = daoCoffee.read(key);
-        return coffee.map(value -> value.getName() + " " +
-                value.getCondition() + " " +
-                value.getPrice() + "$ " +
-                value.getWeight() + "kg\n").orElse(null);
+        return coffee.map(value -> value.getName() + " "
+                + value.getCondition() + " "
+                + value.getPrice() + "$ "
+                + value.getWeight() + "kg\n").orElse(null);
     }
 
     /**

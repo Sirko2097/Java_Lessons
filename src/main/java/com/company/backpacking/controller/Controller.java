@@ -48,6 +48,7 @@ public class Controller {
             switch (key) {
                 case '0':
                     System.exit(0);
+                    break;
                 case '1':
                     view.printMessage(bundle.getString("input.key"));
                     try {

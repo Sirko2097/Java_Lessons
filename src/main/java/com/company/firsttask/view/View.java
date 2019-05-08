@@ -14,7 +14,7 @@ public class View {
 
         Controller controller = new Controller();
 
-        try(BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             while (true) {
                 System.out.print("Input first word: ");
                 firstWord = reader.readLine().trim();
