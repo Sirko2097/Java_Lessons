@@ -12,9 +12,11 @@ public class User {
     public void startComputer() {
         start.execute();
     }
+
     public void stopComputer() {
         stop.execute();
     }
+
     public void resetComputer() {
         reset.execute();
     }
