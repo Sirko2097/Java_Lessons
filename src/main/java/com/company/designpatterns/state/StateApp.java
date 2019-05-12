@@ -8,8 +8,8 @@ public class StateApp {
         radio.setStation(rock);
 
         for (int i = 0; i < 10; i++) {
-            radio.nextStation();
             radio.play();
+            radio.nextStation();
         }
 
         System.out.println();
